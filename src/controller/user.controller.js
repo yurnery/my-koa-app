@@ -4,7 +4,7 @@ class UserController {
   async create(ctx, next) {
     const user = ctx.request.body;
     const result = await userService.create(user);
-    ctx.body = result;
+    ctx.success(result);
   }
 }
 
