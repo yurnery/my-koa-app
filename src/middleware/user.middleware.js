@@ -10,7 +10,7 @@ const verifyUser = async (ctx, next) => {
   }
 
   const user = await userService.getUserByName(name);
-  if (user) {
+  if (user.length > 0) {
     const error = new Error(errorTypes.USER_ALREADY_EXISTS);
     ctx.app.emit("error", error, ctx);
     return;
