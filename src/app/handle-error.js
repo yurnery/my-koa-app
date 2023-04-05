@@ -14,6 +14,16 @@ const handleError = (error, ctx) => {
       message = "用户名已经存在";
       break;
     }
+    case errorTypes.USER_NOT_EXISTS: {
+      code = 409;
+      message = "用户不存在";
+      break;
+    }
+    case errorTypes.USERNAME_OR_PASSWORD_ERROR: {
+      code = 400;
+      message = "用户名或者密码错误";
+      break;
+    }
     default: {
       code = 500;
       message = "服务器内部错误";
