@@ -15,19 +15,16 @@ const connections = mysql.createPool({
   password: MYSQL_PASSWORD,
 });
 
-connections.getConnection((err, conn) => {
-  if (err) {
-    console.log("❌❌❌: 数据库连接失败");
-    return;
-  }
-
-  conn.connect((err) => {
-    if (err) {
-      console.log("❌❌❌: 数据库连接失败");
-      return;
-    }
+async function testConnect() {
+  try {
+    const conn = await connections.getConnection();
+    conn.connect();
     console.log("🚀🚀🚀: 数据库连接成功");
-  });
-});
+  } catch (error) {
+    console.log("❌❌❌: 数据库连接失败");
+  }
+}
+
+testConnect();
 
 module.exports = connections;
