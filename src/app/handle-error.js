@@ -24,6 +24,11 @@ const handleError = (error, ctx) => {
       message = "用户名或者密码错误";
       break;
     }
+    case errorTypes.TOKEN_EXPIRED: {
+      code = 400;
+      message = "无效的 Token";
+      break;
+    }
     default: {
       code = 500;
       message = "服务器内部错误";
