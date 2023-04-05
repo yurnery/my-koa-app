@@ -6,6 +6,4 @@ const momentRouter = new Router({ prefix: "/moment" });
 
 momentRouter.post("/", verifyAuth, momentController.create);
 
-momentRouter.allowedMethods();
-
-module.exports = { momentRouter };
+module.exports = momentRouter;

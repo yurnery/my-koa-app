@@ -7,6 +7,5 @@ const {
 const userRouter = new Router({ prefix: "/user" });
 
 userRouter.post("/", verifyUser, encryptPassword, userController.create);
-userRouter.allowedMethods();
 
 module.exports = userRouter;
