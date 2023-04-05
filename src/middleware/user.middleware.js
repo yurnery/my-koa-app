@@ -19,6 +19,13 @@ const verifyUser = async (ctx, next) => {
   await next();
 };
 
+const encryptPassword = async (ctx, next) => {
+  const { password } = ctx.request.body;
+  ctx.request.body.password = md5password(password);
+  await next();
+};
+
 module.exports = {
   verifyUser,
+  encryptPassword,
 };
