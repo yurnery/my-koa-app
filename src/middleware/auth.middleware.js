@@ -2,9 +2,12 @@ const {
   USER_NAME_AND_PASSWORD_REQUIRED,
   USER_NOT_EXISTS,
   USERNAME_OR_PASSWORD_ERROR,
+  TOKEN_EXPIRED,
 } = require("../constants/error-types");
 const userService = require("../service/user.service");
 const { md5password } = require("../utils/crypto");
+const { PUBLIC_KEY } = require("../app/config");
+const jwt = require("jsonwebtoken");
 
 const verifyLogin = async (ctx, next) => {
   const { name, password } = ctx.request.body;
@@ -31,4 +34,27 @@ const verifyLogin = async (ctx, next) => {
   await next();
 };
 
-module.exports = { verifyLogin, encryptPassword };
+const verifyAuth = async (ctx, next) => {
+  const authorization = ctx.headers.authorization;
+  if (!authorization) {
+    const error = new Error(TOKEN_EXPIRED);
+    ctx.app.emit("error", error, ctx);
+    return;
+  }
+
+  const token = authorization.replace("Bearer ", "");
+  try {
+    const user = jwt.verify(token, PUBLIC_KEY, {
+      algorithms: ["RS256"],
+    });
+    ctx.user = user;
+  } catch (err) {
+    const error = new Error(TOKEN_EXPIRED);
+    ctx.app.emit("error", error, ctx);
+    return;
+  }
+
+  await next();
+};
+
+module.exports = { verifyLogin, verifyAuth };
