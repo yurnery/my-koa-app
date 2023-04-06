@@ -8,5 +8,4 @@ class MomentService {
   }
 }
 
-const momentService = new MomentService();
-module.exports = { momentService };
+module.exports = new MomentService();

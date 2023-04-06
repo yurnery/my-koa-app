@@ -21,4 +21,4 @@ const response = (options = {}) => {
   };
 };
 
-module.exports = response;
+module.exports = { response };

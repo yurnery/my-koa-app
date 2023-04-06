@@ -1,6 +1,6 @@
 const Koa = require("koa");
 const bodyParser = require("koa-bodyparser");
-const response = require("../middleware/response.middleware");
+const { response } = require("../middleware/response.middleware");
 
 const useRouters = require("../router");
 const handleError = require("./handle-error");

@@ -1,4 +1,4 @@
-const { momentService } = require("../service/moment.service");
+const momentService = require("../service/moment.service");
 
 class MomentController {
   async create(ctx, next) {
@@ -9,6 +9,4 @@ class MomentController {
   }
 }
 
-const momentController = new MomentController();
-
-module.exports = { momentController };
+module.exports = new MomentController();
