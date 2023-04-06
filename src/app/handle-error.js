@@ -29,6 +29,11 @@ const handleError = (error, ctx) => {
       message = "无效的 Token";
       break;
     }
+    case errorTypes.PARAMS_INVALID: {
+      code = 400;
+      message = "非法参数";
+      break;
+    }
     default: {
       code = 500;
       message = "服务器内部错误";

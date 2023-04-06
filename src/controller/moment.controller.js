@@ -7,6 +7,18 @@ class MomentController {
     const result = await momentService.create(content, userId);
     ctx.success(result);
   }
+
+  async list(ctx, next) {
+    let { index, size } = ctx.request.query;
+    const result = await momentService.list((+index - 1) * size, +size);
+    ctx.success(result);
+  }
+
+  async detail(ctx, next) {
+    let { momentId } = ctx.request.params;
+    const result = await momentService.detail(+momentId);
+    ctx.success(result);
+  }
 }
 
 module.exports = new MomentController();
